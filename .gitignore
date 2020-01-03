@@ -1,0 +1,8 @@
+
+.DS_Store
+.idea
+*.env
+*.pyc
+venv
+.vscode
+channels.json

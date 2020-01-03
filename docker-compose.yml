@@ -1,0 +1,42 @@
+version: '3'
+services:
+  temerairebot:
+    image: temerairebot_dev_compose
+    build:
+      context: .
+      dockerfile: docker/development/Dockerfile
+    container_name: temerairebot
+    volumes:
+      - .:/data
+    networks:
+      - temerairebot_development
+    stdin_open: true
+    tty: true
+    depends_on:
+      - postgresql
+      - redis
+    environment:
+      - MONGO_HOST=mongodb://mongo:27017
+    env_file: .env
+  redis:
+    image: redis:5.0
+    container_name: redis
+    ports:
+      - "6380:6379"
+    networks:
+      - temerairebot_development
+  postgresql:
+    image: postgres:12.1
+    container_name: postgresql
+    ports:
+      - "5433:5432"
+    networks:
+      - temerairebot_development
+    volumes:
+      - postgresql_data_volume:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=temerairebot_development
+networks:
+  temerairebot_development:
+volumes:
+  postgresql_data_volume:

@@ -1,0 +1,4 @@
+python-dotenv==0.9.1
+python-telegram-bot==12.2
+redis==3.0.1
+Telethon==1.10.9
