@@ -5,7 +5,7 @@ import os
 from telegram.ext import Updater
 from telegram.ext import CommandHandler, CallbackQueryHandler
 from mods.command_triggered.channel_travel.channel_travel import ChannelTravel
-from config.provider import TelegramConfig
+from config.provider import TelegramConfig, ChannelTravelConfig
 
 def error(update, context):
   logger.warning('Update "%s" caused error "%s"', update, context.error)
@@ -17,11 +17,12 @@ logging.basicConfig(level=logging.DEBUG,
 logger = logging.getLogger(__name__)
 
 telegram_config = TelegramConfig()
+ct_config = ChannelTravelConfig()
 
 bot = telegram.Bot(token=telegram_config.bot_token)
 updater = Updater(token=telegram_config.bot_token, use_context=True)
 
-channel_travel = ChannelTravel(telegram_config)
+channel_travel = ChannelTravel(telegram_config, ct_config)
 
 updater.dispatcher.add_handler(CommandHandler('channels', channel_travel.command_channels))
 updater.dispatcher.add_handler(CallbackQueryHandler(channel_travel.callback_channels))
