@@ -5,4 +5,7 @@
 *.pyc
 venv
 .vscode
-channels.json
+config/files/*/*
+!config/files/*/example
+*.session
+google_creds.json

@@ -7,7 +7,7 @@ services:
       dockerfile: docker/development/Dockerfile
     container_name: temerairebot
     volumes:
-      - .:/data
+      - .:/app
     networks:
       - temerairebot_development
     stdin_open: true
